@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.user.TUserMapper" >
+
+  <cache  eviction="LRU" flushInterval="60000"  size="512" readOnly="true"/>
+
+  <select id="checkTUserByUP" resultType="TUser">
+    select * from t_user where employee_id = #{username} and password = #{password}
+  </select>
+    <select id="findAllTUser" resultType="TUser">
+        select * from t_user
+    </select>
+
+    <!--查询所有用户部分信息-->
+    <select id="findPartTUser" resultType="PartTUser">
+        select employee_id,employee,dept_id from t_user where dept_id=#{dept_id} and is_delete!=1 order by employee_id;
+    </select>
+
+    <!--模糊查询用户名称-->
+    <select id="findSomeTUser" resultType="PartTUser">
+        select employee_id,employee,dept_id from t_user where employee like #{employee};
+    </select>
+
+    <update id="updatePassword">
+        update t_user set password=#{password} where employee_id = #{username}
+    </update>
+
+    <!--删除-->
+    <update id="deleteByEID">
+        update t_user set is_delete=1 where employee_id = #{username}
+    </update>
+
+    <insert id="insertUser" parameterType="TUser" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            id,
+        </if>
+        <if test="employee_id != null" >
+            employee_id,
+        </if>
+        <if test="password != null" >
+            password,
+        </if>
+        <if test="employee != null" >
+            employee,
+        </if>
+        <if test="dept_id != null" >
+            dept_id,
+        </if>
+        <if test="is_state != null" >
+            is_state,
+        </if>
+        <if test="job != null" >
+            job,
+        </if>
+        <if test="is_delete != null" >
+            is_delete,
+        </if>
+        <if test="create_date != null" >
+            create_date,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            #{id,jdbcType=INTEGER},
+        </if>
+        <if test="employee_id != null" >
+            #{employee_id,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null" >
+            #{password,jdbcType=VARCHAR},
+        </if>
+        <if test="employee != null" >
+            #{employee,jdbcType=VARCHAR},
+        </if>
+        <if test="dept_id != null" >
+            #{dept_id,jdbcType=VARCHAR},
+        </if>
+        <if test="is_state != null" >
+            #{is_state,jdbcType=INTEGER},
+        </if>
+        <if test="job != null" >
+            #{job,jdbcType=VARCHAR},
+        </if>
+        <if test="is_delete != null" >
+            #{is_delete,jdbcType=INTEGER},
+        </if>
+        <if test="create_date != null" >
+            #{create_date,jdbcType=TIMESTAMP},
+        </if>
+    </trim>
+</insert>
+</mapper>

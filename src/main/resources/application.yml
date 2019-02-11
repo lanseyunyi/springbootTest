@@ -1,0 +1,22 @@
+spring:
+  datasource:
+      name: datasource
+      url: jdbc:mysql://localhost:3306/dbpsms?characterEncoding=utf-8&serverTimezone=UTC&useSSL=false&autoReconnect=true
+      username: root
+      password: ok
+      driverClassName: com.mysql.jdbc.Driver
+      max-active: 2
+      max-idle: 2
+      min-idle: 2
+      initial-size: 2
+      validation-query: select 1
+      test-on-borrow: true
+      test-on-return: false
+      test-while-idle: false
+      time-between-eviction-runs-millis: 3000
+      min-evictable-idle-time-millis: 3000
+      max-wait: 3000
+      jmx-enabled: true
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+  typeAliasesPackage: com.example.demo.pojo
