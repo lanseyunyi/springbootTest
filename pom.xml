@@ -57,13 +57,13 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+        	<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+		<dependency>
+		    <groupId>com.mchange</groupId>
+		    <artifactId>c3p0</artifactId>
+		    <version>0.9.5.3</version>
+		</dependency>
+    	</dependencies>
 
 	<build>
 		<plugins>
